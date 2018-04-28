@@ -1,0 +1,72 @@
+/*SideNav*/
+nav {
+    width: 15vw;
+    height: 100vh;
+    position: fixed;
+    background-color: var(--colour-1);
+}
+#main {
+    width: 85%;
+    float: right;
+}
+
+#account-settings {
+    text-align: right;
+    position: fixed;
+    top: 2%;
+    right: 2%;
+}
+#account-tab {
+    font-size: 50px;
+}
+#account-tab:hover + #account-dropdown, #account-dropdown:hover {
+    display: block;
+}
+#account-dropdown {
+    width: 150px;
+    font-size: var(--mid-text);
+    padding: 15%;
+    background-color: #f2f2f2;
+    box-shadow: 2px 2px 5px;
+}
+#account-dropdown a {
+}
+
+.word {
+    width: 75%;
+    min-height: 250px;
+    padding: 2%;
+    margin: 3%;
+    background-color: #f2f2f2;
+    box-shadow: 2px 2px 5px;
+}
+.date {
+    color: #737373;
+}
+.term {
+    margin: 2% 0;   
+}
+.term * {
+    font-size: var(--large-text);
+    display: inline-block;
+}
+.speak {
+    font-size: var(--large-text);
+    padding-left: 3%;
+}
+.speak:hover {
+    
+}
+.word h1 {
+    
+}
+.def {
+    margin-bottom: 3%;
+}
+.ex {
+    margin-top: 1%;
+    font-style: italic;
+}
+.lang1 * {
+    color: #cc0000;
+}

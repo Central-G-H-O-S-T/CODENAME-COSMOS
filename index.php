@@ -8,7 +8,8 @@
 
     </head>
     <body>
-        
+       
+            
         <?php 
             require_once "../private/sql-bits.php";
             $conn = new mysqli($servername, $username, $password, $dbname);
@@ -43,10 +44,18 @@
                 }
             }
         ?>
-        
-        <!--have to check-->
+         <!--<form action=“search.php” method=“POST”>
+<input type=“text” name=”search” placeholder=“Search”>
+<button type=“submit name=“submit-search”>Search</button>
+</form>-->
         <?php
             if($_SERVER["REQUEST_METHOD"] == "POST") {
+                for($y=0; $y<count($wordID); $y++){
+                        if(isset($_POST[$wordID])) {
+                            echo "hi".$y;
+                            $sql = "UPDATE words SET FolderInID = " . $y . " WHERE WordID = " . $y;
+                        }
+                    }
                 if(!empty($_POST["name"])){
                     $sql = "INSERT INTO folders (FolderName)
                     VALUES ('" . $_POST['name'] . "')";
@@ -54,8 +63,6 @@
                 }
                 else{
                     $sql = "INSERT INTO words (WordText, WordDefEng, WordDefLang2, Example, Note)
-                    VALUES ('" . $_POST['word'] . "', '" . $_POST['defEng'] . "', '" . $_POST['defLang2'] . "', '" . $_POST['ex'] . "', '" . $_POST['note'] . "')";
-                    echo "INSERT INTO words (WordText, WordDefEng, WordDefLang2, Example, Note)
                     VALUES ('" . $_POST['word'] . "', '" . $_POST['defEng'] . "', '" . $_POST['defLang2'] . "', '" . $_POST['ex'] . "', '" . $_POST['note'] . "')";
                     $result = $conn->query($sql);
                 }
@@ -104,16 +111,16 @@
                    <input type ="text" name="word"><br/><br/>
 
                    <h4>Definition (First Language):</h4>
-                   <textarea rows="4" cols="50" name="defEng"></textarea><br/><br/>
+                   <textarea rows="4" cols="45" name="defEng"></textarea><br/><br/>
 
                    <h4>Examples:</h4>
-                   <textarea rows="4" cols="50" name="ex"></textarea><br/><br/>
+                   <textarea rows="4" cols="45" name="ex"></textarea><br/><br/>
 
                    <h4>Definition (Second Language):</h4>
-                   <textarea rows="4" cols="50" name="defLang2"></textarea><br/><br/>
+                   <textarea rows="4" cols="45" name="defLang2"></textarea><br/><br/>
 
                    <h4>Note:</h4>
-                   <textarea rows="4" cols="50" name="note"></textarea><br/><br/>
+                   <textarea rows="4" cols="45" name="note"></textarea><br/><br/>
                     
                    <input type="submit" name="newWord" value="Submit">
                </form>
@@ -142,6 +149,9 @@
                         echo '<option value="' . $folderName[$y] . '">' . $folderName[$y] . '</option>';
                     }
                     echo '</select>
+                    <button name="' . $wordID[$x] . '" type="submit">
+                            <i class="fas fa-check-circle"></i>
+                        </button>
                     </form>
                     <div class="definitions">
                         <div class="def lang1">

@@ -67,10 +67,10 @@ nav {
     font-size: 50px;
 }
 #account-tab:hover + #account-dropdown, #account-dropdown:hover {
-    height: auto;
-    opacity: 1;
+    display: block;
 }
 #account-dropdown {
+    width: 23vw;
     padding: 5%;
     text-align: left;
     font-size: var(--small-text);
@@ -78,9 +78,6 @@ nav {
     box-shadow: 2px 2px 5px;
     transition: opacity 0.5s ease;
 }
-#account-dropdown a {
-}
-
 .word {
     width: 75%;
     min-height: 250px;
@@ -99,6 +96,19 @@ nav {
     font-size: var(--mid-text);
     width: 25%;
     float: right;
+}
+.pick-folder button[type=submit] {
+    background: transparent;
+    border: none;
+}
+.pick-folder button i {
+    color: var(--colour-1);
+    cursor: pointer;
+    font-size: 25px;
+    transition: color 0.25s linear;
+}
+.pick-folder button i:hover {
+    color: var(--colour-dark);
 }
 .term {
     width: 70%;

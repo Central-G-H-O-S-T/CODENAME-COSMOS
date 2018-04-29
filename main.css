@@ -19,6 +19,5 @@ a {
     font-weight: bold;
 }
 .dropdown {
-    height: 0;
-    opacity: 0;
+    display: none;ivyb
 }

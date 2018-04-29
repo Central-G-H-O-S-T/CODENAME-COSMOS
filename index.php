@@ -27,10 +27,10 @@
                     $wordDate[] = $row["WordDate"];
                     $word[] = $row["WordText"];
                     $wordDefEng[] = $row["WordDefEng"];
-                    $wordDeflang2[] = $row["WordDefLang2"];
+                    $wordDefLang2[] = $row["WordDefLang2"];
                     $wordFolder[] = $row["FolderInID"];
-                    $wordExample] = $row["Example"];
-                    $wordNote[] = $row["note"];
+                    $wordExample[] = $row["Example"];
+                    $wordNote[] = $row["Note"];
                 }
             }
             $sql = "SELECT * FROM folders ORDER BY FolderID DESC";
@@ -47,13 +47,16 @@
         <!--have to check-->
         <?php
             if($_SERVER["REQUEST_METHOD"] == "POST") {
-                if(isset($_POST["newWord"])){
-                    $sql = "INSERT INTO words (WordText, WordDefEng, WordDefLang2, Example, Note)
-                    VALUES ('" . $_POST['word'] . "', '" . $_POST['defEng'] . "', '" . $_POST['defLang2'] . "', '" . $_POST['ex'] . "', '" . $_POST['note'] . "')";
-                }
-                else if(!empty($_POST["name"])){
+                if(!empty($_POST["name"])){
                     $sql = "INSERT INTO folders (FolderName)
                     VALUES ('" . $_POST['name'] . "')";
+                    $result = $conn->query($sql);
+                }
+                else{
+                    $sql = "INSERT INTO words (WordText, WordDefEng, WordDefLang2, Example, Note)
+                    VALUES ('" . $_POST['word'] . "', '" . $_POST['defEng'] . "', '" . $_POST['defLang2'] . "', '" . $_POST['ex'] . "', '" . $_POST['note'] . "')";
+                    echo "INSERT INTO words (WordText, WordDefEng, WordDefLang2, Example, Note)
+                    VALUES ('" . $_POST['word'] . "', '" . $_POST['defEng'] . "', '" . $_POST['defLang2'] . "', '" . $_POST['ex'] . "', '" . $_POST['note'] . "')";
                     $result = $conn->query($sql);
                 }
             }
@@ -98,19 +101,19 @@
             <div class="dropdown" id="account-dropdown">
                 <form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                    <h4>Word:</h4>
-                   <input type ="text" name="word"><br/>
+                   <input type ="text" name="word"><br/><br/>
 
-                   <h4>Definition (First Language:</h4>
-                   <textarea rows="4" cols="50" name="defEng"></textarea>
+                   <h4>Definition (First Language):</h4>
+                   <textarea rows="4" cols="50" name="defEng"></textarea><br/><br/>
 
                    <h4>Examples:</h4>
-                   <textarea rows="4" cols="50" name="ex"></textarea><br/>
+                   <textarea rows="4" cols="50" name="ex"></textarea><br/><br/>
 
                    <h4>Definition (Second Language):</h4>
-                   <textarea rows="4" cols="50" name="defLang2"></textarea><br/>
+                   <textarea rows="4" cols="50" name="defLang2"></textarea><br/><br/>
 
                    <h4>Note:</h4>
-                   <textarea rows="4" cols="50" name="note"></textarea><br/>
+                   <textarea rows="4" cols="50" name="note"></textarea><br/><br/>
                     
                    <input type="submit" name="newWord" value="Submit">
                </form>
@@ -121,7 +124,6 @@
             <?php
                 for($x=0; $x<count($wordID); $x++){
                     echo '<div class="word">
-                    <h4 class="date">' . date_format(new DateTime($wordDate[$x]), "m/d/y") . '</h4>
                     <div class="term">
                         <h1>' . $word[$x] . '</h1>
                         <i class="fas fa-volume-up speak" onclick=responsiveVoice.speak("' . $word[$x] . '");></i>
@@ -144,12 +146,15 @@
                     <div class="definitions">
                         <div class="def lang1">
                             <p>' . $wordDefEng[$x] . '</p>
+                            <p class="ex">Example: ' . $wordExample[$x] . '</p>
                         </div>
-                        <!--<div class="def lang2">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed est mattis, aliquam eros in, varius libero.</p>
-                            <p class="ex">Lorem ipsum dolor sit amet.</p>
-                        </div>-->
+                        <div class="def lang2">
+                            <p>' . $wordDefLang2[$x] . '</p>
+                        </div>
                     </div>
+                    
+                    <br/>
+                    <p class="note">Note: ' . $wordNote[$x] . '</p>
                     
                 </div>';
                 }

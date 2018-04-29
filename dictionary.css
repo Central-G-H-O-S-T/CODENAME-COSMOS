@@ -129,5 +129,10 @@ nav {
     font-style: italic;
 }
 .lang1 * {
-    color: #cc0000;
+    color: var(--colour-dark);
+    font-weight: bold;
+}
+.note {
+    margin: 0 0 2% 3%;
+    color: #999;
 }

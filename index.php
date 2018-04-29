@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="dictionary.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+        <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 
     </head>
     <body>
@@ -26,6 +27,7 @@
                     $wordDate[] = $row["WordDate"];
                     $word[] = $row["WordText"];
                     $wordDefEng[] = $row["WordDefEng"];
+                    $wordFolder[] = $row["FolderInID"];
                 }
             }
             $sql = "SELECT * FROM folders ORDER BY FolderID DESC";
@@ -38,6 +40,7 @@
                 }
             }
         ?>
+        
         <!--have to check-->
         <?php
             if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -53,18 +56,34 @@
             <div id="new-folder">
                 <i class="fas fa-plus"></i>
                 <div class="form">
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <h3>
-                        <input type="text" name="name" value="Folder Name">
+                        <input type="text" name="name" placeholder="New Folder">
                         </h3>
-                        <input type="submit" id="submit">
+                        <button type="submit">
+                            <i class="fas fa-check-circle"></i>
+                        </button>
                     </form>
                 </div>
             </div>
-            <div class="folder">
-                <i class="fas fa-folder"></i>
-                <h3>Folder</h3>
-            </div>
+            <?php
+                for($x=0; $x<count($folderID); $x++){
+                    echo '<div class="folder">
+                            <i class="fas fa-folder"></i>
+                            <h3>' . $folderName[$x] . '</h3>
+                            <i style="margin-left: 2%;" class="fas fa-caret-down"></i>
+                            <div class="dropdown folder-dropdown">';
+
+                    for($y=0; $y<count($wordID); $y++){
+                        if($wordFolder[$y] == $folderID[$x]){
+                            echo '<h4>' . $word[$y] . '</h4>';
+                        }
+                    }
+                        
+                    echo '</div>
+                    </div>';
+                }
+            ?>
         </nav>
         
         <div id="account-settings">
@@ -83,11 +102,18 @@
                     <h4 class="date">' . date_format(new DateTime($wordDate[$x]), "m/d/y") . '</h4>
                     <div class="term">
                         <h1>' . $word[$x] . '</h1>
-                        <i class="fas fa-volume-up speak" onclick="readWord()"></i>
+                        <i class="fas fa-volume-up speak" onclick=responsiveVoice.speak("' . $word[$x] . '");></i>
                     </div>
                     <form class="pick-folder" pickmethod="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
                             <h5>Folder:</h5>
                             <select name="folder">';
+                    if($wordFolder[$x] == 0){
+                        echo '<option value="null">---</option>';
+                    }
+                    else{
+                        echo '<option value="' . $folderName[$wordFolder[$x]]  . '">' . $folderName[$wordFolder[$x]] . '</option>';
+                        echo "HI";
+                    }
                     for($y=0; $y<count($folderID); $y++){
                         echo '<option value="' . $folderName[$y] . '">' . $folderName[$y] . '</option>';
                     }

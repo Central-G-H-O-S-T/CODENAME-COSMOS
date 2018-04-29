@@ -5,23 +5,18 @@ nav {
     position: fixed;
     background-color: var(--colour-1);
 }
-.folder {
-    margin: 5%;
-}
-.folder * {
-    display: inline-block;
-    font-size: var(--mid-text);
-    color: var(--colour-dark);
-}
 #new-folder {
+    margin: 4% 0 10% 3%;
     width: 100%;
 }
-#new-folder * {
+#new-folder *, #new-folder input[type=text]::placeholder {
+    font-size: var(--small-text);
+    color: var(--colour-light);
     display: inline-block;
-}
-#new-folder input[type=text] {
     background: transparent;
     border: none;
+}
+#new-folder input[type=text] {
     border-bottom: 2px solid var(--colour-dark);
 }
 #new-folder input[type=submit] {
@@ -29,6 +24,32 @@ nav {
     border: none;
     border-bottom: 2px solid var(--colour-dark);
 }
+#new-folder button i {
+    cursor: pointer;
+    font-size: 25px;
+    transition: color 0.25s linear;
+}
+#new-folder button i:hover {
+    color: #fff;
+}
+.folder {
+    margin: 5%;
+}
+.folder i, .folder h3 {
+    display: inline-block;
+    cursor: pointer;
+    font-size: var(--mid-text);
+    color: var(--colour-dark);
+    text-shadow: 0.5px 0.5px var(--colour-light);
+}
+.folder-dropdown {
+    transition: opacity 0.5s ease;
+}
+.folder:hover .folder-dropdown, .folder-dropdown:hover {
+    height: auto;
+    opacity: 1;
+}
+
 
 #main {
     width: 80%;

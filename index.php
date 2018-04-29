@@ -27,7 +27,10 @@
                     $wordDate[] = $row["WordDate"];
                     $word[] = $row["WordText"];
                     $wordDefEng[] = $row["WordDefEng"];
+                    $wordDeflang2[] = $row["WordDefLang2"];
                     $wordFolder[] = $row["FolderInID"];
+                    $wordExample] = $row["Example"];
+                    $wordNote[] = $row["note"];
                 }
             }
             $sql = "SELECT * FROM folders ORDER BY FolderID DESC";
@@ -44,11 +47,15 @@
         <!--have to check-->
         <?php
             if($_SERVER["REQUEST_METHOD"] == "POST") {
-                if(!empty($_POST["name"])){
+                if(isset($_POST["newWord"])){
+                    $sql = "INSERT INTO words (WordText, WordDefEng, WordDefLang2, Example, Note)
+                    VALUES ('" . $_POST['word'] . "', '" . $_POST['defEng'] . "', '" . $_POST['defLang2'] . "', '" . $_POST['ex'] . "', '" . $_POST['note'] . "')";
+                }
+                else if(!empty($_POST["name"])){
                     $sql = "INSERT INTO folders (FolderName)
                     VALUES ('" . $_POST['name'] . "')";
+                    $result = $conn->query($sql);
                 }
-                $result = $conn->query($sql);
             }
         ?>
        
@@ -87,11 +94,26 @@
         </nav>
         
         <div id="account-settings">
-            <i class="fas fa-user-circle" id="account-tab"></i>
+            <i class="fas fa-plus-circle" id="account-tab"></i>
             <div class="dropdown" id="account-dropdown">
-                <a href="#">Settings</a>
-                <hr>
-                <a href="#" class="strong">Log Out</a>
+                <form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                   <h4>Word:</h4>
+                   <input type ="text" name="word"><br/>
+
+                   <h4>Definition (First Language:</h4>
+                   <textarea rows="4" cols="50" name="defEng"></textarea>
+
+                   <h4>Examples:</h4>
+                   <textarea rows="4" cols="50" name="ex"></textarea><br/>
+
+                   <h4>Definition (Second Language):</h4>
+                   <textarea rows="4" cols="50" name="defLang2"></textarea><br/>
+
+                   <h4>Note:</h4>
+                   <textarea rows="4" cols="50" name="note"></textarea><br/>
+                    
+                   <input type="submit" name="newWord" value="Submit">
+               </form>
             </div>
         </div>
         

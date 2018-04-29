@@ -63,17 +63,20 @@ nav {
     right: 2%;
 }
 #account-tab {
+    color: var(--colour-dark);
     font-size: 50px;
 }
 #account-tab:hover + #account-dropdown, #account-dropdown:hover {
-    display: block;
+    height: auto;
+    opacity: 1;
 }
 #account-dropdown {
-    width: 150px;
+    padding: 5%;
+    text-align: left;
     font-size: var(--small-text);
-    padding: 15%;
-    background-color: #f2f2f2;
+    background-color: var(--colour-light);
     box-shadow: 2px 2px 5px;
+    transition: opacity 0.5s ease;
 }
 #account-dropdown a {
 }
@@ -84,7 +87,7 @@ nav {
     padding: 2%;
     margin: 3%;
     background-color: #f2f2f2;
-    box-shadow: 2px 2px 5px;
+    box-shadow: 2px 2px 5px #b3b3b3;
 }
 .date {
     color: #737373;
@@ -106,11 +109,14 @@ nav {
     display: inline-block;
 }
 .speak {
+    cursor: pointer;
+    color: #666;
     font-size: var(--large-text);
     padding-left: 3%;
+    transition: color 0.25s linear;
 }
 .speak:hover {
-    
+    color: #999999;
 }
 .word h1 {
     

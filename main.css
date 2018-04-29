@@ -4,8 +4,11 @@
 }
 :root {
     --large-text: 35px; 
-    --mid-text: 20px;
+    --mid-text: 25px;
+    --small-text: 20px;
     --colour-1: #6699ff;
+    --colour-light: #e6eeff;
+    --colour-dark: #002b80;
 }
 
 a {

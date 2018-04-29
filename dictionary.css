@@ -5,6 +5,15 @@ nav {
     position: fixed;
     background-color: var(--colour-1);
 }
+.folder {
+    margin: 5%;
+}
+.folder * {
+    display: inline-block;
+    font-size: var(--mid-text);
+    color: var(--colour-dark);
+}
+
 #main {
     width: 85%;
     float: right;
@@ -24,7 +33,7 @@ nav {
 }
 #account-dropdown {
     width: 150px;
-    font-size: var(--mid-text);
+    font-size: var(--small-text);
     padding: 15%;
     background-color: #f2f2f2;
     box-shadow: 2px 2px 5px;

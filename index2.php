@@ -25,7 +25,7 @@
             <header>
                 <h1>Cosmos Personal Dictionary</h1>
             </header>
-            
+            <?php echo 'hi'?>
         </div>
         
     </body>

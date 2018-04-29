@@ -28,13 +28,24 @@
                     $wordDefEng[] = $row["WordDefEng"];
                 }
             }
+            $sql = "SELECT * FROM folders ORDER BY FolderID DESC";
+            $result = $conn->query($sql);
+
+            if($result->num_rows >0){
+                while($row = $result->fetch_assoc()){
+                    $folderID[] = $row["FolderID"];
+                    $folderName[] = $row["FolderName"];
+                }
+            }
         ?>
-        
+        <!--have to check-->
         <?php
             if($_SERVER["REQUEST_METHOD"] == "POST") {
                 if(!empty($_POST["name"])){
-                    
+                    $sql = "INSERT INTO folders (FolderName)
+                    VALUES ('" . $_POST['name'] . "')";
                 }
+                $result = $conn->query($sql);
             }
         ?>
        
@@ -46,10 +57,7 @@
                         <h3>
                         <input type="text" name="name" value="Folder Name">
                         </h3>
-                        <br/><br/>
-
-
-                        <input type="submit" value="Submit" id="submit">
+                        <input type="submit" id="submit">
                     </form>
                 </div>
             </div>
@@ -77,6 +85,14 @@
                         <h1>' . $word[$x] . '</h1>
                         <i class="fas fa-volume-up speak" onclick="readWord()"></i>
                     </div>
+                    <form class="pick-folder" pickmethod="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
+                            <h5>Folder:</h5>
+                            <select name="folder">';
+                    for($y=0; $y<count($folderID); $y++){
+                        echo '<option value="' . $folderName[$y] . '">' . $folderName[$y] . '</option>';
+                    }
+                    echo '</select>
+                    </form>
                     <div class="definitions">
                         <div class="def lang1">
                             <p>' . $wordDefEng[$x] . '</p>
@@ -89,25 +105,6 @@
                     
                 </div>';
                 }
-            ?>
-            
-            <?php
-                 $conn = new mysqli($servername, $username, $password, "entries");
-
-            if($conn->connect_error){
-                die("Connection failed: " . $conn->connect_error);
-                echo("Connection failed: " . $conn->connect_error);
-            }
-
-            $sql = "SELECT word FROM entries";
-            $result = $conn->query($sql);
-
-            if($result->num_rows >0){
-                while($row = $result->fetch_assoc()){
-                    $wordTest[] = $row["word"];
-                }
-            }
-            echo $wordTest[0];
             ?>
             
         </div>

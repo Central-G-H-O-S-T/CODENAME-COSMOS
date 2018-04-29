@@ -24,6 +24,11 @@ nav {
     border: none;
     border-bottom: 2px solid var(--colour-dark);
 }
+#new-folder input[type=submit] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--colour-dark);
+}
 
 #main {
     width: 80%;
@@ -63,7 +68,16 @@ nav {
 .date {
     color: #737373;
 }
+.term, .pick-folder, .pick-folder * {
+    display: inline-block;
+}
+.pick-folder {
+    font-size: var(--mid-text);
+    width: 25%;
+    float: right;
+}
 .term {
+    width: 70%;
     margin: 2% 0;   
 }
 .term * {

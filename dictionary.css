@@ -1,6 +1,6 @@
 /*SideNav*/
 nav {
-    width: 15vw;
+    width: 20vw;
     height: 100vh;
     position: fixed;
     background-color: var(--colour-1);
@@ -13,9 +13,20 @@ nav {
     font-size: var(--mid-text);
     color: var(--colour-dark);
 }
+#new-folder {
+    width: 100%;
+}
+#new-folder * {
+    display: inline-block;
+}
+#new-folder input[type=text] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--colour-dark);
+}
 
 #main {
-    width: 85%;
+    width: 80%;
     float: right;
 }
 

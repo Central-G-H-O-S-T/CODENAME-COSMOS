@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --large-text: 35px; 
+    --mid-text: 25px;
+    --small-text: 20px;
+    --colour-1: #000;
+    --colour-light: #f2f2f2;
+    --colour-dark: #b3b3b3;
+}
+input:focus, textarea:focus {
+    outline: none;
+}
+h4 {
+    margin: 1%;
+    font-size: 18px;
+    font-family: Gill Sans;
+}
+input, textarea {;
+    background: transparent;
+    background-color: #f2f2f2;
+    border: none;
+    border-bottom: 2px solid var(--colour-light);
+}
+a {
+    color: #666;
+    text-decoration: none;
+}
+.strong {
+    font-weight: bold;
+}
+.dropdown {
+    display: none;
+}
+/*SideNav*/
+nav {
+    width: 20vw;
+    height: 100vh;
+    position: fixed;
+    background-color: var(--colour-1);
+}
+#new-folder {
+    margin: 4% 0 10% 3%;
+    width: 100%;
+}
+#new-folder *, #new-folder input[type=text]::placeholder {
+    font-size: var(--small-text);
+    color: var(--colour-light);
+    display: inline-block;
+    background: transparent;
+    border: none;
+}
+#new-folder input[type=text] {
+    border-bottom: 2px solid var(--colour-light);
+}
+#new-folder input[type=submit] {
+    background: transparent;
+    border: none;
+}
+#new-folder button i {
+    cursor: pointer;
+    font-size: 25px;
+    transition: color 0.25s linear;
+}
+#new-folder button i:hover {
+    color: #fff;
+}
+.folder {
+    margin: 5%;
+}
+.folder h3 {
+    font-family: Dubai;
+}
+.folder i, .folder h3 {
+    display: inline-block;
+    cursor: pointer;
+    font-size: var(--mid-text);
+    color: var(--colour-dark);
+}
+.folder-dropdown {
+    display: block!important;
+    height: 0;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+.folder-dropdown h3{
+    margin-left: 10%;
+    color: #8c8c8c;
+    font-size: 20px;
+}
+.folder:hover .folder-dropdown, .folder-dropdown:hover {
+    height: auto;
+    opacity: 1;
+}
+
+
+#main {
+    width: 80%;
+    float: right;
+}
+
+#account-settings {
+    text-align: right;
+    position: fixed;
+    top: 2%;
+    right: 2%;
+}
+#account-tab {
+    color: var(--colour-dark);
+    font-size: 50px;
+}
+#account-tab:hover + #account-dropdown, #account-dropdown:hover {
+    display: block;
+}
+#account-dropdown {
+    width: 23vw;
+    padding: 5%;
+    text-align: left;
+    font-size: var(--small-text);
+    background-color: #666666;
+    box-shadow: 2px 2px 5px;
+    transition: opacity 0.5s ease;
+}
+#newWord h4 {
+    color: #fff;
+}
+.word {
+    width: 75%;
+    min-height: 250px;
+    padding: 2%;
+    margin: 3%;
+    background-color: #f2f2f2;
+    box-shadow: 2px 2px 5px #b3b3b3;
+}
+.date {
+    color: #737373;
+}
+.term, .pick-folder, .pick-folder * {
+    display: inline-block;
+}
+.pick-folder {
+    font-size: var(--mid-text);
+    width: 30%;
+    float: right;
+}
+.pick-folder button[type=submit] {
+    background: transparent;
+    border: none;
+}
+.pick-folder button i {
+    color: var(--colour-1);
+    cursor: pointer;
+    font-size: 25px;
+    transition: color 0.25s linear;
+}
+.pick-folder button i:hover {
+    color: var(--colour-dark);
+}
+.term {
+    width: 70%;
+    margin: 2% 0;   
+}
+.term * {
+    font-size: var(--large-text);
+    display: inline-block;
+}
+.speak {
+    cursor: pointer;
+    color: #666;
+    font-size: var(--large-text);
+    padding-left: 3%;
+    transition: color 0.25s linear;
+}
+.speak:hover {
+    color: #999999;
+}
+.word h1 {
+    font-family: Gill Sans;
+}
+.def {
+    margin-bottom: 3%;
+}
+.ex {
+    margin-top: 1%;
+    font-style: italic;
+}
+.lang1 * {
+    color: #666;
+    font-weight: bold;
+}
+.note {
+    margin: 0 0 2% 3%;
+    color: #999;
+}

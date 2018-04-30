@@ -51,9 +51,11 @@
         <?php
             if($_SERVER["REQUEST_METHOD"] == "POST") {
                 for($y=0; $y<count($wordID); $y++){
-                        if(isset($_POST[$wordID])) {
-                            echo "hi".$y;
-                            $sql = "UPDATE words SET FolderInID = " . $y . " WHERE WordID = " . $y;
+                        if(isset($_POST[$wordID[$y]])) {
+                echo $_POST["folder"]. " " . $wordID[$y];
+                            $sql = "UPDATE words SET FolderInID = " . $_POST["folder"] . " WHERE WordID = " . $wordID[$y];
+                            $result = $conn->query($sql);
+                            break;
                         }
                     }
                 if(!empty($_POST["name"])){
@@ -61,11 +63,12 @@
                     VALUES ('" . $_POST['name'] . "')";
                     $result = $conn->query($sql);
                 }
-                else{
+                else if(isset($_POST["new-word"])){
                     $sql = "INSERT INTO words (WordText, WordDefEng, WordDefLang2, Example, Note)
                     VALUES ('" . $_POST['word'] . "', '" . $_POST['defEng'] . "', '" . $_POST['defLang2'] . "', '" . $_POST['ex'] . "', '" . $_POST['note'] . "')";
                     $result = $conn->query($sql);
                 }
+                header("Refresh:0");
             }
         ?>
        
@@ -87,13 +90,13 @@
                 for($x=0; $x<count($folderID); $x++){
                     echo '<div class="folder">
                             <i class="fas fa-folder"></i>
-                            <h3>' . $folderName[$x] . '</h3>
+                            <h3>' . $folderName[$folderID[$x]] . '</h3>
                             <i style="margin-left: 2%;" class="fas fa-caret-down"></i>
                             <div class="dropdown folder-dropdown">';
 
                     for($y=0; $y<count($wordID); $y++){
                         if($wordFolder[$y] == $folderID[$x]){
-                            echo '<h4>' . $word[$y] . '</h4>';
+                            echo '<h3>' . $word[$y] . '</h3>';
                         }
                     }
                         
@@ -106,7 +109,7 @@
         <div id="account-settings">
             <i class="fas fa-plus-circle" id="account-tab"></i>
             <div class="dropdown" id="account-dropdown">
-                <form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <form id="newWord" autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                    <h4>Word:</h4>
                    <input type ="text" name="word"><br/><br/>
 
@@ -122,7 +125,9 @@
                    <h4>Note:</h4>
                    <textarea rows="4" cols="45" name="note"></textarea><br/><br/>
                     
-                   <input type="submit" name="newWord" value="Submit">
+                   <button style="text-align: center; background: transparent; border: none; font-size: 25px; color: #f2f2f2; cursor: pointer;" type="submit" name="new-word">
+                            Submit: <i class="fas fa-check-circle"></i>
+                        </button>
                </form>
             </div>
         </div>
@@ -135,18 +140,18 @@
                         <h1>' . $word[$x] . '</h1>
                         <i class="fas fa-volume-up speak" onclick=responsiveVoice.speak("' . $word[$x] . '");></i>
                     </div>
-                    <form class="pick-folder" pickmethod="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
+                    <form class="pick-folder" autocomplete="off" method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+                    <input type="hidden" name="var" value="' . $wordID[$x] . '"/> 
                             <h5>Folder:</h5>
                             <select name="folder">';
-                    if($wordFolder[$x] == 0){
-                        echo '<option value="null">---</option>';
+                    /*if($wordFolder[$x] == 0){
+                        echo '<option name="folder" value="null">---</option>';
                     }
-                    else{
-                        echo '<option value="' . $folderName[$wordFolder[$x]]  . '">' . $folderName[$wordFolder[$x]] . '</option>';
-                        echo "HI";
-                    }
+                    else{*/
+                        echo '<option name="folder" value="' . $wordFolder[$x]  . '">' . $folderName[$wordFolder[$x]] . '</option>';
+                    //}
                     for($y=0; $y<count($folderID); $y++){
-                        echo '<option value="' . $folderName[$y] . '">' . $folderName[$y] . '</option>';
+                        echo '<option name="folder" value="' . $folderID[$y] . '">' . $folderName[$folderID[$y]] . '</option>';
                     }
                     echo '</select>
                     <button name="' . $wordID[$x] . '" type="submit">

@@ -1,3 +1,39 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --large-text: 35px; 
+    --mid-text: 25px;
+    --small-text: 20px;
+    --colour-1: #000;
+    --colour-light: #f2f2f2;
+    --colour-dark: #b3b3b3;
+}
+input:focus, textarea:focus {
+    outline: none;
+}
+h4 {
+    margin: 1%;
+    font-size: 18px;
+    font-family: Gill Sans;
+}
+input, textarea {;
+    background: transparent;
+    background-color: #f2f2f2;
+    border: none;
+    border-bottom: 2px solid var(--colour-light);
+}
+a {
+    color: #666;
+    text-decoration: none;
+}
+.strong {
+    font-weight: bold;
+}
+.dropdown {
+    display: none;
+}
 /*SideNav*/
 nav {
     width: 20vw;
@@ -17,12 +53,11 @@ nav {
     border: none;
 }
 #new-folder input[type=text] {
-    border-bottom: 2px solid var(--colour-dark);
+    border-bottom: 2px solid var(--colour-light);
 }
 #new-folder input[type=submit] {
     background: transparent;
     border: none;
-    border-bottom: 2px solid var(--colour-dark);
 }
 #new-folder button i {
     cursor: pointer;
@@ -35,15 +70,25 @@ nav {
 .folder {
     margin: 5%;
 }
+.folder h3 {
+    font-family: Dubai;
+}
 .folder i, .folder h3 {
     display: inline-block;
     cursor: pointer;
     font-size: var(--mid-text);
     color: var(--colour-dark);
-    text-shadow: 0.5px 0.5px var(--colour-light);
 }
 .folder-dropdown {
-    transition: opacity 0.5s ease;
+    display: block!important;
+    height: 0;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+.folder-dropdown h3{
+    margin-left: 10%;
+    color: #8c8c8c;
+    font-size: 20px;
 }
 .folder:hover .folder-dropdown, .folder-dropdown:hover {
     height: auto;
@@ -74,9 +119,12 @@ nav {
     padding: 5%;
     text-align: left;
     font-size: var(--small-text);
-    background-color: var(--colour-light);
+    background-color: #666666;
     box-shadow: 2px 2px 5px;
     transition: opacity 0.5s ease;
+}
+#newWord h4 {
+    color: #fff;
 }
 .word {
     width: 75%;
@@ -94,7 +142,7 @@ nav {
 }
 .pick-folder {
     font-size: var(--mid-text);
-    width: 25%;
+    width: 30%;
     float: right;
 }
 .pick-folder button[type=submit] {
@@ -129,7 +177,7 @@ nav {
     color: #999999;
 }
 .word h1 {
-    
+    font-family: Gill Sans;
 }
 .def {
     margin-bottom: 3%;
@@ -139,7 +187,7 @@ nav {
     font-style: italic;
 }
 .lang1 * {
-    color: var(--colour-dark);
+    color: #666;
     font-weight: bold;
 }
 .note {
